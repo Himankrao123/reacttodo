@@ -1,38 +1,59 @@
-.App {
+.navbarindex{
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: royalblue;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.addtaskdiv{
+  width: 100%;
+  margin-top: 0%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.submitbutton{
+  background-color: green;
+  border-radius: 5px;
+  border: none;
+  font-size: medium;
+  padding: 5px 15px 5px 15px;
+}
+.maintable{
+  margin: 3%;
+  border-top: 2px black solid;
+  border-right: 3px black solid;
+  border-left: 3px black solid;
+  width: 94%;
+  background-color: blue;
+  display: flex;
+}
+.tablist{
+  text-align: center;
+  width: 33%;
+  max-width: 33%;
+}
+#todo #done #all{
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footerofpage{
+  position: fixed;
+  bottom: 0;
+  height: max-content;
+  padding: 2% 2% 3% 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 96%;
+  background-color: black;
+}
+.clearbut{
+  border: none;
+  color: red;
+  background-color: white;
+  font-size: large;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
 }
