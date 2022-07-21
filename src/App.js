@@ -6,16 +6,14 @@ function App() {
   const [task, setTask] = useState([]);
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const json = localStorage.getItem("tasks");
+    const fetchedtasks = localStorage.getItem("tasks");
     const savedCount = JSON.parse(localStorage.getItem("count"));
-    const savedTasks = JSON.parse(json);
+    const savedTasks = JSON.parse(fetchedtasks);
     if (savedTasks && savedTasks.length !== 0) {
       setTask(savedTasks);
-      console.log(savedTasks);
     }
     if (savedCount && savedCount !== 0) {
       setCount(savedCount);
-      console.log(savedCount);
     }
     document.getElementById("done").style = "display:none";
     document.getElementById("all").style = "display:none";
@@ -39,10 +37,7 @@ function App() {
     };
     setTask([...task, newTask]);
     e.target.addtask.value = "";
-    document.getElementById("done").style = "display:none";
-    document.getElementById("all").style = "display:none";
-    document.getElementById("todo").style = "display:block";
-    console.log(newTask)
+    // console.log(newTask)
   };
   function todo() {
     document.getElementById("done").style = "display:none";
@@ -68,6 +63,14 @@ function App() {
     setTask([...task]);
 
   }
+  function markunDone(given){
+    for(let i=0;i<task.length;i++){
+      if(task[i].id === given.id){
+        task[i].status = 'Red';
+      }
+    }
+    setTask([...task]);
+  }
   function clearTasks(){
     setTask([]);
     setCount(0);
@@ -90,7 +93,7 @@ function App() {
       <table className="maintable">
         <td className="tablist">
           <fieldset>
-            <legend>
+            <legend id={"todoleg"}>
               <button
                 id={"todobut"}
                 onClick={todo}
@@ -101,19 +104,20 @@ function App() {
             </legend>
             <div id={"todo"}>
               {
-                task.filter(task => task.status === 'Red').map((task)=>
+                task.filter(task1 => task1.status === 'Red').map((task)=>
                 <p style={{color:task.status}} key={task.id}>
-                  <button onClick={() => markDone(task)}>👍
-                  </button>
+                  <button className="markdonebut" onClick={() => markDone(task)}>&#128077; 
+                  </button>&nbsp;&nbsp;&nbsp;
                   {task.text}
-                </p>)
+                </p>
+                )
               }
             </div>
           </fieldset>
         </td>
         <td className="tablist">
           <fieldset>
-            <legend>
+            <legend id={"doneleg"}>
               <button
                 id={"donebut"}
                 onClick={done}
@@ -124,13 +128,16 @@ function App() {
             </legend>
             <div id={"done"}>
               {
-                task.filter(task => task.status === 'Green').map((task)=><p style={{color:task.status}} key={task.id}>{task.text}</p>)
+                task.filter(task => task.status === 'Green').map((task)=><p style={{color:task.status}} key={task.id}>
+                <button className="markundonebut" onClick={() => markunDone(task)}>&#128077; 
+                </button>&nbsp;&nbsp;&nbsp;
+                {task.text}</p>)
               }
             </div>
           </fieldset>
         </td>
         <td className="tablist">
-          <fieldset>
+          <fieldset id={"allleg"}>
             <legend>
               <button
                 id={"allbut"}
@@ -142,7 +149,8 @@ function App() {
             </legend>
             <div id={"all"}>
               {
-                task.map((task)=><p style={{color:task.status}} key={task.id}>{task.text}</p>)
+                task.map((task)=>
+                <p style={{color:task.status}} key={task.id}>{task.text}</p>)
               }
             </div>
           </fieldset>
